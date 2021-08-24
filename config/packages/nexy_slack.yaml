@@ -1,0 +1,4 @@
+nexy_slack:
+
+  # The Slack API Incoming WebHooks URL.
+  endpoint: https://hooks.slack.com/services/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
