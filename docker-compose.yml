@@ -1,18 +1,16 @@
 version: "3.7"
 services:
 
-  db:
+  mysql:
     image: mysql:5.7
-    container_name: db
+    command: "--sql-mode=STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION --max_allowed_packet=4GB"
     environment:
-      MYSQL_ROOT_PASSWORD: my_secret_password
-      MYSQL_DATABASE: app_db
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_user_pass
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: the_spacebar
     ports:
       - "6033:3306"
     volumes:
-      - ./data/db:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
 
   the_spacebar:
     build:
