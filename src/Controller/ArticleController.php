@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Service\MarkdownHelper;
 use Nexy\Slack\Client;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
@@ -33,6 +33,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/news/{slug}", name="article_show")
+     * @throws \Http\Client\Exception
      */
     public function show($slug, MarkdownHelper $markdownHelper, Client $client)
     {
@@ -42,7 +43,8 @@ class ArticleController extends AbstractController
                 ->withIcon(':ghost:')
                 ->setText('Ah, Kirk, my old friend...');
 
-            $client->sendMessage($message);
+            $Response = $client->sendMessage($message);
+            dump($Response, $client);exit;
         }
 
         $comments = [
