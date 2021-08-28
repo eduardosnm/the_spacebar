@@ -17,8 +17,6 @@ RUN composer install \
 RUN mv .env.dist .env
 # RUN php artisan key:generate
 RUN chmod 777 -R var/
-RUN mkdir .data/mysql
-RUN chmod 777 -R .data/
 RUN chown -R www-data:www-data var
 RUN chown -R www-data:www-data var/cache
 RUN a2enmod rewrite
