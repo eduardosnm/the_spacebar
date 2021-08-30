@@ -23,10 +23,13 @@ class ArticleAdminController extends AbstractController
 EOF
             );
 
-
         if (rand(1, 10) > 2) {
             $article->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(1, 100))));
         }
+
+        $article->setAuthor("Mike Ferengi")
+            ->setHeartCount(rand(4, 100))
+            ->setImageFilename('asteroid.jpeg');
 
         $em->persist($article);
         $em->flush();
