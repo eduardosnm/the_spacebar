@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Service\MarkdownHelper;
 use App\Service\SlackClient;
+use Doctrine\ORM\EntityManagerInterface;
 use Nexy\Slack\Client;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,10 +38,17 @@ class ArticleController extends AbstractController
      * @Route("/news/{slug}", name="article_show")
      * @throws \Http\Client\Exception
      */
-    public function show($slug, MarkdownHelper $markdownHelper, SlackClient $slackClient)
+    public function show($slug, SlackClient $slackClient, EntityManagerInterface $em)
     {
         if ($slug == 'khaaaaaan'){
             $slackClient->sendMessage("eduardo", "this is a test");
+        }
+
+        $repository = $em->getRepository(Article::class);
+        /** @var  $article */
+        $article = $repository->findOneBy(["slug" => $slug]);
+        if (!$article) {
+            throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
         }
 
         $comments = [
@@ -48,16 +57,9 @@ class ArticleController extends AbstractController
             'I like bacon too! Buy some from my site! bakinsomebacon.com',
         ];
 
-        $articleContent = <<<EOF
-Texto te de **ejemplo** que tengo que poner para que sirve para probar la interfaz que lo convierte en
- [markdown](https://google.com.ar) 
-EOF;
-        $articleContent = $markdownHelper->parse($articleContent);
 
         return $this->render('article/show.html.twig', [
-            'title' => ucwords(str_replace('-', ' ', $slug)),
-            'articleContent' => $articleContent,
-            'slug' => $slug,
+            "article" => $article,
             'comments' => $comments,
         ]);
     }

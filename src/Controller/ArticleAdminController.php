@@ -17,7 +17,7 @@ class ArticleAdminController extends AbstractController
     {
         $article = new Article();
         $article->setTitle("Why Asteroids Taste Like Bacon")
-            ->setSlug("Why-asteroids-taste-like-bacon-".rand(100, 999))
+            ->setSlug("why-asteroids-taste-like-bacon-".rand(100, 999))
             ->setContent(<<<EOF
 **Ejemplo** de contenido.
 EOF
