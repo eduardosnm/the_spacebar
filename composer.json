@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.1.3",
         "ext-iconv": "*",
+        "antishov/doctrine-extensions-bundle": "^1.4",
         "composer/package-versions-deprecated": "1.11.99.3",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
@@ -78,7 +79,7 @@
     "extra": {
         "symfony": {
             "id": "01C1TW989CK77ZA7B2H4HC9WAG",
-            "allow-contrib": false
+            "allow-contrib": true
         }
     }
 }

@@ -16,7 +16,6 @@ class ArticleFixtures extends BaseFixture
     {
         $this->createMany(Article::class, 10, function (Article $article, $count) {
             $article->setTitle($this->faker->words(7, true))
-                ->setSlug($this->faker->slug)
                 ->setContent(<<<EOF
 **Ejemplo** de contenido.
 EOF
