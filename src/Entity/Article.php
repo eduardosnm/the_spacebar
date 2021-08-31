@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +34,7 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
 
@@ -93,12 +94,12 @@ class Article
         return $this;
     }
 
-    public function getPublishedAt(): ?\DateTimeImmutable
+    public function getPublishedAt(): ?DateTime
     {
         return $this->publishedAt;
     }
 
-    public function setPublishedAt(?\DateTimeImmutable $publishedAt): self
+    public function setPublishedAt(?DateTime $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
 

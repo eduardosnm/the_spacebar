@@ -7,23 +7,28 @@ use Doctrine\Persistence\ObjectManager;
 
 class ArticleFixtures extends BaseFixture
 {
+    private static $articleImages = [
+        'asteroid.jpeg',
+        'mercury.jpeg',
+        'lightspeed.png',
+    ];
     public function loadData(ObjectManager $em)
     {
         $this->createMany(Article::class, 10, function (Article $article, $count) {
-            $article->setTitle("Why Asteroids Taste Like Bacon")
-                ->setSlug("why-asteroids-taste-like-bacon-".$count)
+            $article->setTitle($this->faker->words(7, true))
+                ->setSlug($this->faker->slug)
                 ->setContent(<<<EOF
 **Ejemplo** de contenido.
 EOF
                 );
 
-            if (rand(1, 10) > 2) {
-                $article->setPublishedAt(new \DateTimeImmutable(sprintf('-%d days', rand(1, 100))));
+            if ($this->faker->boolean(70)) {
+                $article->setPublishedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             }
 
-            $article->setAuthor("Mike Ferengi")
-                ->setHeartCount(rand(4, 100))
-                ->setImageFilename('asteroid.jpeg');
+            $article->setAuthor($this->faker->name)
+                ->setHeartCount($this->faker->numberBetween(5, 100))
+                ->setImageFilename($this->faker->randomElement(self::$articleImages));
         });
 
         $em->flush();
