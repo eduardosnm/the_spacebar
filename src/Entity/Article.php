@@ -14,7 +14,7 @@ use Gedmo\Timestampable\Traits\Timestampable;
 class Article
 {
     use Timestampable;
-    
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
