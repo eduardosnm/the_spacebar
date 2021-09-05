@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\Timestampable;
@@ -180,7 +181,9 @@ class Article
      */
     public function getNonDeletedComments(): Collection
     {
-        return $this->comments;
+        $criteria = ArticleRepository::getNonDeletedComments();
+
+        return $this->comments->matching($criteria);
     }
 
     public function addComment(Comment $comment): self
