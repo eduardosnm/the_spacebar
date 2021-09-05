@@ -57,12 +57,16 @@
                             </div>
                         </div>
 
-                        {% for comment in article.comments %}
+                        {% for comment in article.nonDeletedComments %}
                         <div class="row">
                             <div class="col-sm-12">
                                 <img class="comment-img rounded-circle" src="{{ asset('images/alien-profile.png') }}">
                                 <div class="comment-container d-inline-block pl-3 align-top">
                                     <span class="commenter-name">{{ comment.authorName }}</span>
+                                    <small>about {{ comment.createdAt|ago }}</small>
+                                    {% if comment.isDeleted %}
+                                        <span class="fa fa-close" style="color: red"></span> deleted
+                                    {% endif %}
                                     <br>
                                     <span class="comment"> {{ comment.content }}</span>
                                     <p><a href="#">Reply</a></p>
