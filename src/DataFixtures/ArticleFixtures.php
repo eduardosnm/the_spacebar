@@ -30,20 +30,6 @@ EOF
                 ->setHeartCount($this->faker->numberBetween(5, 100))
                 ->setImageFilename($this->faker->randomElement(self::$articleImages));
 
-            $comment1 = new Comment();
-            $comment1->setAuthorName("Anonimo");
-            $comment1->setContent("content");
-//            $comment1->setArticle($article);
-            $em->persist($comment1);
-
-            $comment2 = new Comment();
-            $comment2->setAuthorName("Anonimo");
-            $comment2->setContent("otro contenido");
-//            $comment2->setArticle($article);
-            $em->persist($comment2);
-
-            $article->addComment($comment1);
-            $article->addComment($comment2);
 
         });
 
