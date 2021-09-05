@@ -142,8 +142,14 @@
     "guzzlehttp/psr7": {
         "version": "1.8.2"
     },
+    "knplabs/knp-components": {
+        "version": "v1.3.10"
+    },
     "knplabs/knp-markdown-bundle": {
         "version": "1.9.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v2.8.0"
     },
     "knplabs/knp-time-bundle": {
         "version": "v1.16.1"

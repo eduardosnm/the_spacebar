@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,9 +22,8 @@ class CommentRepository extends ServiceEntityRepository
 
     /**
      * @param string|null $term
-     * @return Comment[]
      */
-    public function findAllWithSearch(?string $term)
+    public function getWithSearchQueryBuilder(?string $term): QueryBuilder
     {
         $qb = $this->createQueryBuilder('c')
             ->innerJoin('c.article', 'a')
@@ -34,9 +34,8 @@ class CommentRepository extends ServiceEntityRepository
                 ->setParameter('term', "%{$term}%");
         }
 
-        return $qb->orderBy('c.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+        return $qb
+            ->orderBy('c.createdAt', 'DESC');
     }
 
     // /**
