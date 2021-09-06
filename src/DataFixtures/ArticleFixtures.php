@@ -13,7 +13,8 @@ class ArticleFixtures extends BaseFixture
         'mercury.jpeg',
         'lightspeed.png',
     ];
-    public function loadData(ObjectManager $em)
+
+    protected function loadData(ObjectManager $em)
     {
         $this->createMany(Article::class, 10, function (Article $article, $count) use ($em) {
             $article->setTitle($this->faker->words(7, true))

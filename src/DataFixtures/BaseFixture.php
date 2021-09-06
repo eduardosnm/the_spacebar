@@ -17,7 +17,7 @@ abstract class BaseFixture extends Fixture
 
     private $referencesIndex = [];
 
-    abstract public function loadData(ObjectManager $em);
+    abstract protected function loadData(ObjectManager $em);
 
     public function load(ObjectManager $manager)
     {
